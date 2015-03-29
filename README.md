@@ -1,16 +1,40 @@
 Meteor on Container Engine
-=============
 
-## v0.1
+This is a fork of "an initial attempt at a deploy script for running [Meteor](http://meteor.com) on [Google Container Engine](https://cloud.google.com/container-engine/), itself running [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes)."
 
-This is an initial attempt at a deploy script for running [Meteor](http://meteor.com) on [Google Container Engine](https://cloud.google.com/container-engine/), itself running [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes).
+My version allows you to run any meteor application in the cluster.
 
-## Background
+Assuming you have your google cloud account and tools ready you only have to do two things:
 
-At [Q42](http://q42.com) we view Cloud Platform and Meteor as core technologies that enable us to focus on building great products and apps instead of managing servers and doing dev ops. So it made sense for us to explore combining them, not in the least because Meteor doesn't yet have a "go to" scalable hosting solution. As we're working on a startup of our own, it seemed like a good idea to explore this.
+Build your Meteor application.
 
-## Getting started
+1) meteor build --architecture=os.linux.x86_64 ./
 
-This repository represents our first exploration of the shell scripts required to deploy your Meteor app to Container Engine. It takes care of basic configuration of your cluster, sets up pods and a replication controller and initialises replicas. We use a persistent disk for MongoDB, which means that even if you tear down the cluster, your data remains safe. And by binding session affinity to your client's IP, you should get a nice sticky session.
+This will create a .tar.gz with a bundle, that you have to copy to a visible URL. You can use dropbox. 
 
-To get started, read [the documentation](documentation.md). We're accepting any issues you run into and any pull requests you think are relevant and would love to hear from you at [@q42 on Twitter](http://twitter.com/q42)!
+2) Change the BUNDLE_URL in meteor-controller.json value to this URL.
+
+3) Run the ./setup.sh 
+
+Go grab a coffee.. When you are back - congratulations! you have a running Meteor + MongoDB cluster at the google cloud. 
+
+If you don't have your google cloud ready, you have to:
+
+1) create an account at [google cloud platform](https://cloud.google.com/)
+2) Go to "my console". 
+3) Add a project.
+4) Click on a project name, go to APIs, under the "Google Cloud APIs" click on Compute Engine API, enable it, go back, click "more" and do the same for Container Engine API.
+
+Now go to the console, install the gcloud tool
+6) $ curl https://sdk.cloud.google.com | bash
+
+After that you might wanna restart your shell. 
+
+Login to the platform. (Make sure you use the same gmail ccount that you used to create the account at the cloud. If you see weird authentication errors later on in the console, this might be the reason)
+7) $ gcloud auth login
+
+Set the project. This is the Project ID that you can find at the top level of your google developer console. 
+
+8)  gcloud config set project PROJECTID
+
+And now you are ready to do the first part of this tutorial. 
