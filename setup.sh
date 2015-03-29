@@ -2,7 +2,7 @@
 
 DISK_NAME=mongo-disk
 DISK_SIZE=200GB
-ZONE=us-central1-c
+ZONE=us-central1-f
 
 
 # TODO make project, zone, region and cluster configurable and pass it to every gcloud command?
@@ -42,6 +42,8 @@ while true; do
   printf "."
   sleep 2
 done
+
+sleep 60
 
 # Create our replication controller and service, also based on the JSON configuration
 gcloud preview container kubectl create -f meteor-controller.json
