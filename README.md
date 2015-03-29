@@ -1,8 +1,11 @@
 Meteor on Container Engine
 
-This is a fork of "an initial attempt at a deploy script for running [Meteor](http://meteor.com) on [Google Container Engine](https://cloud.google.com/container-engine/), itself running [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes)."
+This is a fork of [repository](https://github.com/Q42/meteor-gke) described as "an initial attempt at a deploy script for running [Meteor](http://meteor.com) on [Google Container Engine](https://cloud.google.com/container-engine/), itself running [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes)."
 
-My version allows you to run any meteor application in the cluster.
+My fork allows you to run any meteor application in the cluster.
+
+To get this to work with kubernetes/google cloud I'm using modified by me [version](https://github.com/lgandecki/meteord) of [meteorhacks meteord docker container](https://github.com/meteorhacks/meteord/)  .
+
 
 Assuming you have your google cloud account and tools ready you only have to do two things:
 
